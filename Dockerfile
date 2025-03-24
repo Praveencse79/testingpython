@@ -1,6 +1,6 @@
-# Base Image
-FROM python:3.9-slim-buster  # (or your preferred Python version)
+FROM python:3.9-slim-buster
 
+RUN apt update -y && apt install awscli -y
 # Set working directory
 WORKDIR /app
 
