@@ -1,6 +1,5 @@
 FROM python:3.9-slim-buster
-RUN apt update && apt install -y python3-pip
-
+docker build --no-cache -t myimage
 RUN apt update -y && apt install awscli -y
 WORKDIR /app
 
