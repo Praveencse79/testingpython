@@ -1,20 +1,14 @@
-FROM python:3.9-slim-buster
+FROM python:3.9-slim
 
-RUN apt update -y && apt install awscli -y
-# Set working directory
-WORKDIR /app
+# Allow statements and log messages to immediately appear in the Knative logs
+ENV PYTHONUNBUFFERED True
 
-# Copy requirements file
-COPY requirements.txt .
+# Copy local code to the container image.
+ENV APP_HOME /app
+WORKDIR $APP_HOME
+COPY . ./
 
-# Upgrade pip, setuptools, and wheel
-RUN pip install --upgrade pip setuptools wheel
 
-# Install dependencies
+# Install production dependencies.
 RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the rest of the application
-COPY . .
-
-# Command to run the application
-CMD ["python", "app.py"]
+CMD ["python", "-u", "main.py"]
