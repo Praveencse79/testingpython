@@ -1,6 +1,12 @@
 FROM python:3.9-slim-buster
 
-RUN apt update -y && apt install awscli -y
+# Install necessary system dependencies
+RUN apt update -y && apt install -y \
+    awscli \
+    gcc \
+    libc-dev \
+    python3-dev
+
 # Set working directory
 WORKDIR /app
 
